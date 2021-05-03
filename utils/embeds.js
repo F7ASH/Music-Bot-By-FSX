@@ -1,4 +1,5 @@
 module.exports.notInVoiceChannelEmbed = (Discord, message) => {
+  message.react("❌");
   const notInVoiceChannelEmbed = new Discord.MessageEmbed()
     .setColor(message.client.embedColor)
     .setDescription(
@@ -12,10 +13,19 @@ module.exports.notInSameVoiceChannelEmbed = (
   message,
   voiceChannelId
 ) => {
+  message.react("❌");
   const notInSameVoiceChannelEmbed = new Discord.MessageEmbed()
     .setColor(message.client.embedColor)
     .setDescription(
       `:x: You are not in a voice channel where music is being played,\nPlease Join <#${voiceChannelId}> To use Music Commands.`
     );
   message.channel.send(notInSameVoiceChannelEmbed);
+};
+
+module.exports.noplayersEmbed = (Discord, message) => {
+  message.react("❌");
+  const noPlayersEmbed = new Discord.MessageEmbed()
+    .setColor(message.client.embedColor)
+    .setDescription(":x: No Music is playing Around You");
+  message.channel.send(noPlayersEmbed);
 };

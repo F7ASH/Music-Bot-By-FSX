@@ -4,8 +4,14 @@ module.exports = {
   aliases: ["p"],
   category: "music",
   run: async (message, args, client, Discord, player) => {
-    const text = args.join(" ").toLowerCase();
-
+    if (!args.length) {
+      message.react("❌");
+      const noSongTextEmbed = new Discord.MessageEmbed()
+        .setColor(client.embedColor)
+        .setDescription(":x: Please Enter Song name or Song Link to play.");
+      return message.channel.send(noSongTextEmbed);
+    }
+    message.react("👌");
     player.play(message, args.join(" "));
   },
 };

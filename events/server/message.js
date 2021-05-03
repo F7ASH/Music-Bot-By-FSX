@@ -14,6 +14,7 @@ module.exports = (Discord, client, message) => {
       (cmd) => cmd.aliases && cmd.aliases.includes(commandName)
     );
   if (!command) return;
+  const queue = client.player.getQueue(message);
   if (command) {
     if (command.category.toLowerCase() === "music") {
       const { channel } = message.member.voice;
@@ -30,8 +31,8 @@ module.exports = (Discord, client, message) => {
           message.guild.me.voice.channel.id
         );
       }
-      command.run(message, args, client, Discord, client.player);
+      return command.run(message, args, client, Discord, client.player, queue);
     }
-    command.run(message, args, client, Discord, client.player);
+    command.run(message, args, client, Discord, client.player, queue);
   }
 };
