@@ -1,3 +1,4 @@
+const filters = require("../configs/filters.json");
 const Distube = require("distube");
 module.exports = (client, Discord) => {
   client.player = new Distube(client, {
@@ -7,6 +8,7 @@ module.exports = (client, Discord) => {
     youtubeDL: true,
     emitNewSongOnly: true,
     updateYouTubeDL: true,
+    customFilters: filters,
   });
   client.playerStatus = (queue, type) => {
     const statusOptions = {

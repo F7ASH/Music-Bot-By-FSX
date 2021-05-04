@@ -14,6 +14,5 @@ module.exports = {
       .setDescription(`Skipped [${queue.songs[0].name}](${queue.songs[0].url})`)
       .setColor(client.embedColor);
     message.channel.send(stoppedPlayingEmbed);
-    console.log(queue);
   },
 };
