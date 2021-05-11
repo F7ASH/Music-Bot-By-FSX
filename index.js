@@ -12,9 +12,12 @@ client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 
 /* Executing handlers in './middleware' */
-["DistubeHandler", "CommandHandler", "EventHandler"].forEach((handler) => {
+["MusicHandler", "CommandHandler", "EventHandler"].forEach((handler) => {
   require(`./middleware/${handler}`)(client, Discord);
 });
 
 /* Loging the client with token */
 client.login(process.env.BOT_TOKEN);
+
+/* Exporting Client for Further Uses */
+module.exports = client;

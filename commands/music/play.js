@@ -1,4 +1,4 @@
-const { getPreview } = require("spotify-url-info");
+// const { getPreview } = require("spotify-url-info");
 module.exports = {
   name: "play",
   aliases: ["p"],

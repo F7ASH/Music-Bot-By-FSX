@@ -9,9 +9,10 @@ module.exports = {
       return noplayersEmbed(Discord, message);
     }
     if (player.isPlaying(message) || !player.isPaused(message)) {
+      message.react("❌");
       const alreadyPlayingTheMusicEmbed = new Discord.MessageEmbed()
         .setColor(client.embedColor)
-        .setDescription("Music Is Not Paused to Resume!");
+        .setDescription(":x: Music Is Not Paused to Resume!");
       return message.channel.send(alreadyPlayingTheMusicEmbed);
     }
     message.react("▶️");

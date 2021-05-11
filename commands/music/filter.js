@@ -13,17 +13,24 @@ module.exports = {
       const currentFilter = queue.filter;
       message.react("👌");
       player.setFilter(message, queue.filter);
-      const removedFilterEmbed = new Discord.MessgaeEmbed()
+      const removedFilterEmbed = new Discord.MessageEmbed()
         .setColor(client.embedColor)
         .setDescription(`Removed **${currentFilter}** Filter Successfully!`);
       return message.channel.send(removedFilterEmbed);
     }
     if (args[0].toLowerCase() === "none" && !queue.filter) {
       message.react("❌");
-      const noFilterAndTryingToRemoveFilter = new Discord.MessgaeEmbed()
+      const noFilterAndTryingToRemoveFilter = new Discord.MessageEmbed()
         .setColor(client.embedColor)
         .setDescription(":x: There Is No Filter Applied to Remove it.");
       return message.channel.send(noFilterAndTryingToRemoveFilter);
+    }
+    if (queue.songs[0].isLive) {
+      message.react("❌");
+      const cannotAddFilterToLiveVideos = new Discord.MessageEmbed()
+        .setColor(client.embedColor)
+        .setDescription(`:x: Cannot Add Filters to Live Videos!`);
+      return message.channel.send(cannotAddFilterToLiveVideos);
     }
     if (!Object.keys(filters).includes(args[0].toLowerCase())) {
       message.react("❌");
@@ -38,7 +45,9 @@ module.exports = {
     player.setFilter(message, args[0]);
     const addedFilterSuccessfulyEmbed = new Discord.MessageEmbed()
       .setColor(client.embedColor)
-      .setDescription(`Successfully Added ${queue.filter} Filter to Queue!`);
+      .setDescription(
+        `Successfully Added **${queue.filter}** Filter to Queue!`
+      );
     return message.channel.send(addedFilterSuccessfulyEmbed);
   },
 };

@@ -9,6 +9,7 @@ module.exports = async (
   queue,
   song
 ) => {
+  message.guild.me.voice.setDeaf(true, "Playing Music");
   const status = playerStatus(queue, false);
   let songArtist = { name: "No Data" };
   if (song.youtube) {

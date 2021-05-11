@@ -16,6 +16,25 @@ module.exports = (Discord, client, message) => {
   if (!command) return;
   const queue = client.player.getQueue(message);
   if (command) {
+    if (command.devOnly || command.category.toLowerCase() === "dev") {
+      let isDev = true;
+      client.developers.forEach((dev) => {
+        if (message.author.id != dev.id) {
+          isDev = false;
+        }
+      });
+      const notDevFunction = () => {
+        const youAreNotADeveloperEmbed = new Discord.MessageEmbed()
+          .setColor(client.errorEmbedColor)
+          .setDescription(
+            ":x: This is a Developer Only Command And You are not A Developer to use it."
+          );
+        return message.channel.send(youAreNotADeveloperEmbed);
+      };
+      isDev
+        ? command.run({ message, Discord, client, args })
+        : notDevFunction();
+    }
     if (command.category.toLowerCase() === "music") {
       const { channel } = message.member.voice;
       if (!channel) {
