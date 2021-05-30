@@ -12,7 +12,7 @@ module.exports = {
       .setAuthor("Filters")
       .setColor(client.embedColor)
       .setDescription(
-        `**Current Filter  :** ${currentFilter}\n**Avilable Filters  :**\n\n\`\`\`js${filterNames.join(
+        `**Current Filter  :** \`\`\`${currentFilter}\`\`\`\n**Avilable Filters  :**\n\`\`\`${filterNames.join(
           ", "
         )}\`\`\`\n****Note :*** Use \`${
           client.prefix

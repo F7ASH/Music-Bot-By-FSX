@@ -5,15 +5,38 @@ const {
   notInSameVoiceChannelEmbed,
 } = require("../../utils/embeds");
 module.exports = (Discord, client, message) => {
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
-  const args = message.content.slice(prefix.length).split(/ +/);
+  const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const prefixRegex = new RegExp(
+    `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
+  );
+  let matchedPrefix;
+  try {
+    const [, mp] = message.content.match(prefixRegex);
+    if (mp) {
+      matchedPrefix = mp;
+    }
+  } catch (e) {
+    null;
+  }
+  if (!prefixRegex.test(message.content)) return;
+  const args = message.content.slice(matchedPrefix.length).split(/ +/);
   const commandName = args.shift().toLowerCase();
   const command =
     client.commands.get(commandName) ||
     client.commands.find(
       (cmd) => cmd.aliases && cmd.aliases.includes(commandName)
     );
-  if (!command) return;
+
+  if (!command && matchedPrefix != prefix) {
+    const mentionedReplyEmbed = new Discord.MessageEmbed()
+      .setColor(client.embedColor)
+      .setAuthor(client.user.username)
+      .setDescription(
+        `:small_orange_diamond: Prefix For this Server is ${prefix}\n\n > Use \`${prefix}help\` For all Commands List!`
+      )
+      .setTimestamp();
+    return message.channel.send(mentionedReplyEmbed);
+  }
   const queue = client.player.getQueue(message);
   if (command) {
     if (command.devOnly || command.category.toLowerCase() === "dev") {
