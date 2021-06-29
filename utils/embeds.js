@@ -29,3 +29,13 @@ module.exports.noplayersEmbed = (Discord, message) => {
     .setDescription(":x: No Music is playing Around You");
   message.channel.send(noPlayersEmbed);
 };
+
+module.exports.noArgsEmbed = (Discord, message) => {
+  message.react("❌");
+  const noArgsEmbed = new Discord.MessageEmbed()
+    .setColor(message.client.embedColor)
+    .setDescription(":x: No Time Provided to **seek/forward/rewind**");
+  message.channel.send(noPlayersEmbed);
+};
+
+module.exports;

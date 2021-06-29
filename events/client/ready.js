@@ -1,8 +1,9 @@
 const config = require("../../configs/config.json");
 const { status: statusOptions, interval } = require("../../configs/botStatus");
-
+const { version } = require("../../package.json");
 module.exports = (Discord, client) => {
-  client.version = console.log(`${client.user.username} is ready`);
+  console.log(`${client.user.username} is ready`);
+  client.version = version;
   client.embedColor = config.embedColor;
   client.prefix = config.prefix;
   client.developers = config.developers;

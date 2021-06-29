@@ -1,6 +1,6 @@
 {
   "name": "distube-music-bot",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,15 +13,15 @@
   "author": "FiveSquareCo.",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/opus": "^0.5.0",
+    "@discordjs/opus": "^0.5.3",
     "canvas": "^2.8.0",
     "discord.js": "^12.5.3",
-    "distube": "^2.8.13",
+    "distube": "^2.8.15",
     "dotenv": "^8.6.0",
-    "ffmpeg-static": "^4.3.0",
-    "mongoose": "^5.12.8",
-    "youtube-sr": "^4.0.7",
-    "ytdl-core": "^4.8.2"
+    "ffmpeg-static": "^4.4.0",
+    "mongoose": "^5.12.14",
+    "youtube-sr": "^4.1.5",
+    "ytdl-core": "github:distubejs/node-ytdl-core"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
